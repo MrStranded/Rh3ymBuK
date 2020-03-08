@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".application.MainActivity">
+
+    <EditText
+        android:id="@+id/bukName"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:ems="10"
+        android:hint="BuK Name"
+        android:inputType="textPersonName"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/createNew"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:backgroundTint="#4CAF50"
+        android:text="Create New BuK"
+        android:textAllCaps="false"
+        android:textColor="@android:color/background_light"
+        app:layout_constraintTop_toBottomOf="@+id/bukName"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/bukList"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/createNew" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
