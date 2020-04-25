@@ -22,8 +22,8 @@ class BukActivity: AppCompatActivity() {
         buk = Buk(this, name ?: "BuK")
 
         buk.load()
-        
-        bukText.setText(buk.text)
+
+        createChapters()
         
         bukText.addTextChangedListener {
             buk.update(bukText.text.toString())
@@ -33,6 +33,10 @@ class BukActivity: AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    private fun createChapters() {
+        bukText.setText(buk.text)
     }
 
     override fun onPause() {
