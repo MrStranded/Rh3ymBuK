@@ -2,6 +2,7 @@ package ch.epicodes.buk.infrastructure
 
 import android.content.Context
 import android.os.Environment
+import android.util.Log
 import ch.epicodes.buk.domain.Buk
 import java.io.File
 import java.io.FileNotFoundException
@@ -32,8 +33,10 @@ fun loadBuk(context: Context, name: String): String {
 }
 
 fun saveBuk(context: Context, buk: Buk) {
+    val mergedText = buk.mergeChapters()
+    Log.println(Log.DEBUG, "save", """buk text: $mergedText""")
     val writer = context.openFileOutput(buk.name, Context.MODE_PRIVATE).bufferedWriter()
     writer.use {
-        writer.write(buk.text)
+        writer.write(mergedText)
     }
 }

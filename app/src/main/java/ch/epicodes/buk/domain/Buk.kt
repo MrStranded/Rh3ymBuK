@@ -1,6 +1,7 @@
 package ch.epicodes.buk.domain
 
 import android.content.Context
+import android.util.Log
 import ch.epicodes.buk.infrastructure.loadBuk
 import ch.epicodes.buk.infrastructure.saveBuk
 
@@ -27,6 +28,8 @@ class Buk(val context: Context, val name: String = "BuK", var text: String = "")
     }
 
     private fun splitChapters() {
+        Log.println(Log.DEBUG, "buk","""text: ${text}""")
+
         val separator = System.getProperty("line.separator") ?: '\n'
         val lines = text.lines()
 
@@ -50,5 +53,26 @@ class Buk(val context: Context, val name: String = "BuK", var text: String = "")
                 text += line + separator
             }
         }
+
+        if (! hasChapters) {
+            chapter.text = text
+            chapters.add(chapter)
+        }
+
+        for (c in chapters) {
+            Log.println(Log.DEBUG, "chapter","""title: ${c.title}""")
+            Log.println(Log.DEBUG, "chapter","""text: ${c.text}""")
+        }
+    }
+
+    fun mergeChapters(): String {
+        var mergedText = ""
+        val separator = System.getProperty("line.separator") ?: '\n'
+
+        for (chapter in chapters) {
+            mergedText += CHAPTER_START + chapter.title + separator + chapter.text + separator
+        }
+
+        return mergedText
     }
 }
