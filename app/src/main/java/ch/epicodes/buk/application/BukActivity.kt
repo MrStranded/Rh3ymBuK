@@ -29,23 +29,27 @@ class BukActivity: AppCompatActivity() {
         buk = Buk(this, name ?: "BuK")
 
         viewManager = LinearLayoutManager(this)
-        viewAdapter = ChapterAdapter(this, buk)
+        viewAdapter = ChapterAdapter(buk)
 
         initBuk()
 
         chapterList.apply {
-            setHasFixedSize(true)
+            setHasFixedSize(false)
             layoutManager = viewManager
             adapter = viewAdapter
         }
-        
-//        bukText.addTextChangedListener {
-//            buk.update(bukText.text.toString())
-//        }
 
         back.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+        }
+
+        createChapter.setOnClickListener {
+            buk.createChapter()
+
+            val size = buk.chapters.size
+            viewAdapter.notifyItemInserted(size - 1)
+            viewAdapter.notifyItemRangeChanged(size - 1, size)
         }
     }
 
@@ -61,18 +65,6 @@ class BukActivity: AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         buk.load()
-//        bukText.setText(buk.text)
     }
-
-    private fun EditText.addTextChangedListener(action: () -> Unit) {
-        this.addTextChangedListener(object: TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                action()
-            }
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-        })
-    }
-
 }
 
