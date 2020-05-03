@@ -43,8 +43,6 @@ class Buk(val context: Context, val name: String = "BuK", var text: String = "")
             mergedText += CHAPTER_START + chapter.title + separator + chapter.text + separator
         }
 
-        println("""merging chapters: $mergedText""")
-
         return mergedText
     }
 }
